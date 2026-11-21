@@ -844,7 +844,7 @@ var forms=[document.getElementById('contact'),document.querySelector('#formulair
 function nearestForm(){var best=forms[0],d=1e9;forms.forEach(function(f){var r=f.getBoundingClientRect(),dd=Math.abs(r.top+r.height/2-window.innerHeight/2);if(dd<d){d=dd;best=f}});return best}
 document.querySelectorAll('a[href="#contact"]').forEach(function(a){if(a.id==='totop')return;a.addEventListener('click',function(e){e.preventDefault();var f=nearestForm();var y=f.getBoundingClientRect().top+window.scrollY-90;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});var i=f.querySelector('input');if(i)setTimeout(function(){try{i.focus({preventScroll:true})}catch(_){}},600)})});
 /* Envoi des formulaires */
-var ENDPOINT='';   /* URL du webhook GoHighLevel, a renseigner */
+var ENDPOINT='https://services.leadconnectorhq.com/hooks/cysc3HH5skLVGrXUBUxi/webhook-trigger/613a4949-931f-41f3-ba7f-e48e6790ceab';   /* URL du webhook GoHighLevel, a renseigner */
 var TEL='09 56 99 17 76';
 var JOURS=[1,2,3,4,5];               /* jours ouverts : 1 = lundi ... 6 = samedi */
 var MATIN=['09:00','09:30','10:00','10:30','11:00','11:30','12:00'];
