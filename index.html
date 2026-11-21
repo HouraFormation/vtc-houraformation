@@ -426,6 +426,17 @@ a{color:#C8102E}a:hover{color:#1E2A5A}
 .burger span{background:#1E2A5A!important}
 .bic{width:18px;height:18px;margin-right:8px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px}
 .sb-l1{display:inline-flex;align-items:center;justify-content:center}.sb-l1 .bic{width:19px;height:19px}
+
+/* Formulaires */
+button.btn{font-family:inherit;border:0;cursor:pointer}
+button.btn-out{border:1.5px solid #1E2A5A}
+button.btn[disabled]{opacity:.6;cursor:wait}
+.field input.err,.field select.err{border-color:#C8102E;background:#FFF6F7}
+.lead-form label.err span{color:#C8102E}
+.fmsg{margin:0;padding:12px 14px;border-radius:10px;font-size:14px;line-height:1.45;font-weight:500}
+.fmsg.ok{background:#EAF8F1;color:#14674A}
+.fmsg.ko{background:#FDECEF;color:#A50D26}
+.fmsg a{color:inherit;font-weight:700}
 </style>
 </head>
 <body>
@@ -465,13 +476,14 @@ a{color:#C8102E}a:hover{color:#1E2A5A}
 <div id="contact" style="position: relative; width: 100%; max-width: 440px; background: #ffffff; border-radius: 18px; padding: 32px; box-sizing: border-box; box-shadow: 0 24px 60px rgba(30,42,90,.25)">
 <h2 style="margin: 0 0 6px; font-size: 24px; font-weight: 700; color: #1E2A5A">Renseignez-vous <span class="red">sans engagement</span></h2>
 <p style="margin: 0 0 20px; font-size: 14px; line-height: 1.5; color: #4A5270">Un conseiller vous rappelle pour répondre à vos questions.</p>
-<form style="display: flex; flex-direction: column; gap: 14px">
-<div class="grid2" style="gap: 14px"><div class="field"><label for="h-prenom">Prénom</label><input id="h-prenom" type="text" autocomplete="given-name"></div><div class="field"><label for="h-nom">Nom</label><input id="h-nom" type="text" autocomplete="family-name"></div></div>
-<div class="field"><label for="h-mail">Email</label><input id="h-mail" type="email" autocomplete="email"></div>
-<div class="field"><label for="h-tel">Téléphone</label><input id="h-tel" type="tel" autocomplete="tel"></div>
-<div class="grid2" style="gap: 14px"><div class="field"><label for="h-permis">Permis B depuis</label><select id="h-permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="h-obj">Votre objectif</label><select id="h-obj"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
-<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
-<div class="fbtn"><a class="btn btn-red" href="#contact"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</a><a class="btn btn-out" href="#contact"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</a></div>
+<form class="lead-form" novalidate style="display: flex; flex-direction: column; gap: 14px">
+<div class="grid2" style="gap: 14px"><div class="field"><label for="h-prenom">Prénom</label><input id="h-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="h-nom">Nom</label><input id="h-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
+<div class="field"><label for="h-mail">Email</label><input id="h-mail" name="email" required type="email" autocomplete="email"></div>
+<div class="field"><label for="h-tel">Téléphone</label><input id="h-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" autocomplete="tel"></div>
+<div class="grid2" style="gap: 14px"><div class="field"><label for="h-permis">Permis B depuis</label><select id="h-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="h-obj">Votre objectif</label><select id="h-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
+<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div>
+<p class="fmsg" role="status" aria-live="polite" hidden></p>
 </form>
 </div>
 </div>
@@ -703,12 +715,13 @@ a{color:#C8102E}a:hover{color:#1E2A5A}
 <div style="position: relative; width: 100%; max-width: 460px; background: #ffffff; border-radius: 18px; padding: 32px; box-sizing: border-box; box-shadow: 0 0 40px rgba(0,0,0,.3)">
 
 <h3 style="margin: 0 0 14px; font-size: 20px; font-weight: 700; color: #1E2A5A">Téléchargez la brochure</h3>
-<form style="display: flex; flex-direction: column; gap: 14px">
-<div class="grid2" style="gap: 14px"><div class="field"><label for="f-prenom">Prénom</label><input id="f-prenom" type="text" autocomplete="given-name"></div><div class="field"><label for="f-nom">Nom</label><input id="f-nom" type="text" autocomplete="family-name"></div></div>
-<div class="grid2" style="gap: 12px"><div class="field"><label for="f-mail">Email</label><input id="f-mail" type="email" autocomplete="email"></div><div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" type="tel" autocomplete="tel"></div></div>
-<div class="grid2" style="gap: 14px"><div class="field"><label for="f-permis">Permis B depuis</label><select id="f-permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="f-obj">Votre objectif</label><select id="f-obj"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
-<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
-<div class="fbtn"><a class="btn btn-red" href="#contact"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</a><a class="btn btn-out" href="#contact"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</a></div>
+<form class="lead-form" novalidate style="display: flex; flex-direction: column; gap: 14px">
+<div class="grid2" style="gap: 14px"><div class="field"><label for="f-prenom">Prénom</label><input id="f-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
+<div class="grid2" style="gap: 12px"><div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" required type="email" autocomplete="email"></div><div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" autocomplete="tel"></div></div>
+<div class="grid2" style="gap: 14px"><div class="field"><label for="f-permis">Permis B depuis</label><select id="f-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="f-obj">Votre objectif</label><select id="f-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
+<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div>
+<p class="fmsg" role="status" aria-live="polite" hidden></p>
 </form>
 </div>
 </div>
@@ -756,6 +769,36 @@ el.addEventListener('mousedown',function(e){if(e.button)return;last=Date.now();d
 window.addEventListener('mousemove',function(e){if(!d)return;d.m=e.clientX-d.x;el.scrollLeft=d.l-d.m});
 window.addEventListener('mouseup',function(){if(!d)return;var k=Math.round(d.l/el.clientWidth);if(d.m<-50)k++;else if(d.m>50)k--;k=Math.max(0,Math.min(n-1,k));el.classList.remove('drag');go(k);last=Date.now();d=null});
 setInterval(function(){if(document.hidden||Date.now()-last<8000||!el.clientWidth)return;go((idx()+1)%n)},4000);
+/* Boutons : toujours vers le formulaire le plus proche */
+var forms=[document.getElementById('contact'),document.querySelector('#formulaire form')].filter(Boolean);
+function nearestForm(){var best=forms[0],d=1e9;forms.forEach(function(f){var r=f.getBoundingClientRect(),dd=Math.abs(r.top+r.height/2-window.innerHeight/2);if(dd<d){d=dd;best=f}});return best}
+document.querySelectorAll('a[href="#contact"]').forEach(function(a){if(a.id==='totop')return;a.addEventListener('click',function(e){e.preventDefault();var f=nearestForm();var y=f.getBoundingClientRect().top+window.scrollY-90;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});var i=f.querySelector('input');if(i)setTimeout(function(){try{i.focus({preventScroll:true})}catch(_){}},600)})});
+/* Envoi des formulaires */
+var ENDPOINT='';   /* URL du webhook GoHighLevel, a renseigner */
+var AGENDA='';     /* lien de l'agenda pour "Prendre rendez-vous", a renseigner */
+var TEL='09 56 99 17 76';
+var qs=new URLSearchParams(location.search);
+document.querySelectorAll('.lead-form').forEach(function(f){
+var msg=f.querySelector('.fmsg');
+f.addEventListener('input',function(e){e.target.classList.remove('err');var l=e.target.closest('label');if(l)l.classList.remove('err')});
+f.addEventListener('submit',function(e){
+e.preventDefault();
+var intent=(e.submitter&&e.submitter.value)||'brochure',ok=true;
+f.querySelectorAll('[required]').forEach(function(el){var v=el.type==='checkbox'?el.checked:el.checkValidity()&&el.value.trim()!=='';if(!v){ok=false;if(el.type==='checkbox')el.closest('label').classList.add('err');else el.classList.add('err')}});
+function show(t,c){msg.hidden=false;msg.className='fmsg '+c;msg.innerHTML=t}
+if(!ok){show('Merci de compléter les champs en rouge et de cocher la case de contact.','ko');return}
+var data=new URLSearchParams(new FormData(f));data.set('intent',intent);data.set('page',location.href);
+['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].forEach(function(k){if(qs.get(k))data.set(k,qs.get(k))});
+var done=intent==='rendez-vous'?'Merci ! Votre demande est bien reçue. Un conseiller vous rappelle pour fixer le rendez-vous.':'Merci ! La brochure arrive dans votre boîte mail dans quelques minutes. Pensez à vérifier vos spams.';
+if(!ENDPOINT){show('Le formulaire est en cours d\'activation. Pour être rappelé tout de suite, appelez le <a href="tel:+33956991776">'+TEL+'</a>.','ko');return}
+var btns=f.querySelectorAll('button');btns.forEach(function(b){b.disabled=true});
+fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:data}).then(function(){
+show(done,'ok');f.reset();
+window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead',lead_type:intent});
+if(intent==='rendez-vous'&&AGENDA)setTimeout(function(){location.href=AGENDA},1200);
+}).catch(function(){show('Un souci technique est survenu. Appelez-nous au <a href="tel:+33956991776">'+TEL+'</a>.','ko')}).finally(function(){btns.forEach(function(b){b.disabled=false})});
+});
+});
 })();
 </script>
 </body>
