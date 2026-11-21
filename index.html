@@ -437,6 +437,45 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 .fmsg.ok{background:#EAF8F1;color:#14674A}
 .fmsg.ko{background:#FDECEF;color:#A50D26}
 .fmsg a{color:inherit;font-weight:700}
+
+/* Prise de rendez-vous */
+#contact [hidden],#formulaire [hidden]{display:none!important}
+.bk-grid{display:grid;grid-template-columns:1fr;gap:20px}
+.bk-lab{margin:0 0 10px;font-size:14px;font-weight:600;color:#1E2A5A}.bk-lab span{color:#C8102E}
+.cal{border:1px solid #E3E6F0;border-radius:12px;padding:10px}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.cal-t{font-weight:600;color:#1E2A5A;text-transform:capitalize}
+.cal-nav{width:32px;height:32px;border:0;border-radius:8px;background:#F3F5FA;color:#1E2A5A;font-size:20px;cursor:pointer}
+.cal-nav:disabled{opacity:.3;cursor:default}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-d{font-size:12px;color:#8C93AD;padding:4px 0}
+.cal-c{height:36px;border:0;border-radius:8px;background:transparent;font:inherit;font-size:14px;color:#C9CFDD;cursor:default}
+.cal-c.out{visibility:hidden}
+.cal-c.ok{color:#1E2A5A;font-weight:600;cursor:pointer}.cal-c.ok:hover{background:#F3F5FA}
+.cal-c.sel{background:#C8102E!important;color:#ffffff}
+.bk-tabs{display:grid;grid-template-columns:1fr 1fr;background:#F3F5FA;border-radius:999px;padding:4px;margin-bottom:14px}
+.bk-tabs button{border:0;border-radius:999px;padding:9px 0;background:transparent;font:inherit;font-weight:600;font-size:14px;color:#1E2A5A;cursor:pointer}
+.bk-tabs button.on{background:#C8102E;color:#ffffff}
+.bk-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px}
+.bk-s{height:42px;border:1.5px solid #1E2A5A;border-radius:999px;background:#ffffff;font:inherit;font-weight:600;font-size:14px;color:#1E2A5A;cursor:pointer}
+.bk-s:hover{background:#F3F5FA}.bk-s.sel{background:#C8102E;border-color:#C8102E;color:#ffffff}
+.bk-hint{margin:6px 0 0;font-size:13px;color:#8C93AD}
+.bk-bar{height:4px;border-radius:4px;background:#E3E6F0;overflow:hidden;margin:20px 0 14px;visibility:hidden}
+.bk-bar i{display:block;height:100%;width:30%;background:#C8102E;border-radius:4px;animation:bkload 1s ease-in-out infinite}
+.bk.load .bk-bar{visibility:visible}
+@keyframes bkload{0%{transform:translateX(-100%)}100%{transform:translateX(340%)}}
+.bk-err{margin-bottom:12px}
+.bk-foot{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.bk-back{border:0;background:none;font:inherit;font-size:15px;font-weight:600;color:#C8102E;text-decoration:underline;cursor:pointer;padding:0}
+.bk-go{flex:1;max-width:320px}
+.lead-form button.btn[disabled]{cursor:wait}
+.card-load,.load .lead-form{opacity:.85}
+.thx{text-align:center;padding:28px 6px}
+.thx-t{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:14px}
+.thx-t svg{width:52px;height:52px;fill:none;stroke:#1FA463;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.thx-t span{font-size:36px;font-weight:700;color:#1E2A5A}
+.thx p{margin:0;font-size:16px;line-height:1.55;color:#1E2A5A}
+@media (max-width:700px){.bk-foot{flex-direction:column-reverse}.bk-go{max-width:none;width:100%}}
 </style>
 </head>
 <body>
@@ -775,28 +814,84 @@ function nearestForm(){var best=forms[0],d=1e9;forms.forEach(function(f){var r=f
 document.querySelectorAll('a[href="#contact"]').forEach(function(a){if(a.id==='totop')return;a.addEventListener('click',function(e){e.preventDefault();var f=nearestForm();var y=f.getBoundingClientRect().top+window.scrollY-90;window.scrollTo({top:Math.max(0,y),behavior:'smooth'});var i=f.querySelector('input');if(i)setTimeout(function(){try{i.focus({preventScroll:true})}catch(_){}},600)})});
 /* Envoi des formulaires */
 var ENDPOINT='';   /* URL du webhook GoHighLevel, a renseigner */
-var AGENDA='';     /* lien de l'agenda pour "Prendre rendez-vous", a renseigner */
 var TEL='09 56 99 17 76';
-var qs=new URLSearchParams(location.search);
+var JOURS=[1,2,3,4,5];               /* jours ouverts : 1 = lundi ... 6 = samedi */
+var MATIN=['09:00','09:30','10:00','10:30','11:00','11:30','12:00'];
+var APREM=['14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30'];
+var HORIZON=30;                      /* nombre de jours reservables */
+var qs=new URLSearchParams(location.search),TEST=qs.get('test')==='1';
+var MOIS=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+var JN=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+var CHECK='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M7.5 12.5l3 3 6-6.5"></path></svg>';
+function pad(n){return(n<10?'0':'')+n}
+function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+function slotsFor(d,list){var now=new Date();return list.filter(function(h){var t=new Date(d);t.setHours(+h.slice(0,2),+h.slice(3),0,0);return t-now>2*3600e3})}
+function bookable(d){var t=new Date();t.setHours(0,0,0,0);var max=new Date(t);max.setDate(max.getDate()+HORIZON);return d>=t&&d<=max&&JOURS.indexOf(d.getDay())>-1&&(slotsFor(d,MATIN).length+slotsFor(d,APREM).length)>0}
+function send(data){
+ data.set('page',location.href);['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].forEach(function(k){if(qs.get(k))data.set(k,qs.get(k))});
+ if(TEST)return new Promise(function(r){setTimeout(r,900)});
+ return fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:data});
+}
 document.querySelectorAll('.lead-form').forEach(function(f){
-var msg=f.querySelector('.fmsg');
-f.addEventListener('input',function(e){e.target.classList.remove('err');var l=e.target.closest('label');if(l)l.classList.remove('err')});
-f.addEventListener('submit',function(e){
-e.preventDefault();
-var intent=(e.submitter&&e.submitter.value)||'brochure',ok=true;
-f.querySelectorAll('[required]').forEach(function(el){var v=el.type==='checkbox'?el.checked:el.checkValidity()&&el.value.trim()!=='';if(!v){ok=false;if(el.type==='checkbox')el.closest('label').classList.add('err');else el.classList.add('err')}});
+var msg=f.querySelector('.fmsg'),card=f.parentNode;
+var bk=document.createElement('div');bk.className='bk';bk.hidden=true;
+bk.innerHTML='<div class="bk-grid"><div><p class="bk-lab">Date du rendez-vous<span>*</span></p><div class="cal"><div class="cal-h"><button type="button" class="cal-nav" data-m="-1" aria-label="Mois précédent">‹</button><span class="cal-t"></span><button type="button" class="cal-nav" data-m="1" aria-label="Mois suivant">›</button></div><div class="cal-g"></div></div></div><div><p class="bk-lab">Créneau du rendez-vous<span>*</span> (30 min)</p><div class="bk-tabs"><button type="button" class="on" data-p="m">Matin</button><button type="button" data-p="a">Après-midi</button></div><div class="bk-slots"></div><p class="bk-hint">Choisissez d\'abord une date.</p></div></div><div class="bk-bar"><i></i></div><p class="fmsg bk-err" hidden></p><div class="bk-foot"><button type="button" class="bk-back">Retour</button><button type="button" class="btn btn-red bk-go" disabled>'+'<svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div>';
+var thx=document.createElement('div');thx.className='thx';thx.hidden=true;
+card.appendChild(bk);card.appendChild(thx);
+var head=[].slice.call(card.children).filter(function(c){return c!==f&&c!==bk&&c!==thx&&!c.classList.contains('deco')});
+var view=new Date();view.setDate(1);var selD=null,selH=null,per='m',payload=null;
+function cal(){
+ bk.querySelector('.cal-t').textContent=MOIS[view.getMonth()]+' '+view.getFullYear();
+ var g=bk.querySelector('.cal-g'),h='';['lu','ma','me','je','ve','sa','di'].forEach(function(x){h+='<span class="cal-d">'+x+'</span>'});
+ var first=new Date(view),off=(first.getDay()+6)%7;first.setDate(1-off);
+ for(var k=0;k<42;k++){var d=new Date(first);d.setDate(first.getDate()+k);var inM=d.getMonth()===view.getMonth(),ok=inM&&bookable(d),sel=selD&&ymd(d)===ymd(selD);
+  h+='<button type="button" class="cal-c'+(inM?'':' out')+(ok?' ok':'')+(sel?' sel':'')+'"'+(ok?' data-d="'+ymd(d)+'"':' disabled')+'>'+d.getDate()+'</button>'}
+ g.innerHTML=h;
+ var t=new Date();bk.querySelector('[data-m="-1"]').disabled=view.getFullYear()===t.getFullYear()&&view.getMonth()===t.getMonth();
+ var lim=new Date();lim.setDate(lim.getDate()+HORIZON);bk.querySelector('[data-m="1"]').disabled=view.getFullYear()===lim.getFullYear()&&view.getMonth()===lim.getMonth();
+}
+function slots(){
+ var box=bk.querySelector('.bk-slots'),hint=bk.querySelector('.bk-hint');
+ bk.querySelectorAll('.bk-tabs button').forEach(function(b){b.classList.toggle('on',b.dataset.p===per)});
+ if(!selD){box.innerHTML='';hint.hidden=false;hint.textContent='Choisissez d\'abord une date.';return}
+ var l=slotsFor(selD,per==='m'?MATIN:APREM);hint.hidden=l.length>0;hint.textContent='Plus de créneau sur cette période, essayez l\'autre.';
+ box.innerHTML=l.map(function(x){return '<button type="button" class="bk-s'+(x===selH?' sel':'')+'" data-h="'+x+'">'+x.replace(':','h')+'</button>'}).join('');
+ bk.querySelector('.bk-go').disabled=!selH;
+}
+bk.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;
+ if(b.dataset.m){view.setMonth(view.getMonth()+(+b.dataset.m));cal()}
+ else if(b.dataset.d){var p=b.dataset.d.split('-');selD=new Date(+p[0],p[1]-1,+p[2]);selH=null;if(!slotsFor(selD,MATIN).length)per='a';cal();slots()}
+ else if(b.dataset.p){per=b.dataset.p;slots()}
+ else if(b.dataset.h){selH=b.dataset.h;slots()}
+ else if(b.classList.contains('bk-back')){bk.hidden=true;f.hidden=false;head.forEach(function(c){c.hidden=false})}
+ else if(b.classList.contains('bk-go'))book();
+});
+function done(t){bk.hidden=true;f.hidden=true;head.forEach(function(c){c.hidden=true});thx.innerHTML='<div class="thx-t">'+CHECK+'<span>Merci !</span></div><p>'+t+'</p>';thx.hidden=false;f.reset();
+ window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead',lead_type:payload.get('intent')});
+ var y=card.getBoundingClientRect().top+window.scrollY-90;if(card.getBoundingClientRect().top<0)window.scrollTo({top:y,behavior:'smooth'})}
+function loading(on,btns){bk.classList.toggle('load',on);card.classList.toggle('load',on);btns.forEach(function(b){b.disabled=on})}
+function book(){
+ payload.set('intent','rendez-vous');payload.set('rdv_date',ymd(selD));payload.set('rdv_heure',selH);
+ var o=-selD.getTimezoneOffset(),iso=ymd(selD)+'T'+selH+':00'+(o>=0?'+':'-')+pad(Math.floor(Math.abs(o)/60))+':'+pad(Math.abs(o)%60);payload.set('rdv_debut',iso);
+ var btns=[].slice.call(bk.querySelectorAll('button'));loading(true,btns);
+ send(payload).then(function(){done('Votre rendez-vous téléphonique du '+JN[selD.getDay()]+' '+selD.getDate()+' '+MOIS[selD.getMonth()]+' à '+selH.replace(':','h')+' est bien pris en compte. Consultez vos emails pour l\'ajouter à votre agenda.')})
+ .catch(function(){var er=bk.querySelector('.bk-err');er.hidden=false;er.className='fmsg ko bk-err';er.innerHTML='Un souci technique est survenu. Appelez-nous au <a href="tel:+33956991776">'+TEL+'</a>.'})
+ .finally(function(){loading(false,btns);bk.querySelector('.bk-go').disabled=!selH});
+}
 function show(t,c){msg.hidden=false;msg.className='fmsg '+c;msg.innerHTML=t}
-if(!ok){show('Merci de compléter les champs en rouge et de cocher la case de contact.','ko');return}
-var data=new URLSearchParams(new FormData(f));data.set('intent',intent);data.set('page',location.href);
-['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'].forEach(function(k){if(qs.get(k))data.set(k,qs.get(k))});
-var done=intent==='rendez-vous'?'Merci ! Votre demande est bien reçue. Un conseiller vous rappelle pour fixer le rendez-vous.':'Merci ! La brochure arrive dans votre boîte mail dans quelques minutes. Pensez à vérifier vos spams.';
-if(!ENDPOINT){show('Le formulaire est en cours d\'activation. Pour être rappelé tout de suite, appelez le <a href="tel:+33956991776">'+TEL+'</a>.','ko');return}
-var btns=f.querySelectorAll('button');btns.forEach(function(b){b.disabled=true});
-fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:data}).then(function(){
-show(done,'ok');f.reset();
-window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead',lead_type:intent});
-if(intent==='rendez-vous'&&AGENDA)setTimeout(function(){location.href=AGENDA},1200);
-}).catch(function(){show('Un souci technique est survenu. Appelez-nous au <a href="tel:+33956991776">'+TEL+'</a>.','ko')}).finally(function(){btns.forEach(function(b){b.disabled=false})});
+f.addEventListener('input',function(e){e.target.classList.remove('err');var l=e.target.closest('label');if(l)l.classList.remove('err');msg.hidden=true});
+f.addEventListener('submit',function(e){
+ e.preventDefault();
+ var intent=(e.submitter&&e.submitter.value)||'brochure',ok=true;
+ f.querySelectorAll('[required]').forEach(function(el){var v=el.type==='checkbox'?el.checked:el.checkValidity()&&el.value.trim()!=='';if(!v){ok=false;if(el.type==='checkbox')el.closest('label').classList.add('err');else el.classList.add('err')}});
+ if(!ok){show('Merci de compléter les champs en rouge et de cocher la case de contact.','ko');return}
+ if(!ENDPOINT&&!TEST){show('Le formulaire est en cours d\'activation. Pour être rappelé tout de suite, appelez le <a href="tel:+33956991776">'+TEL+'</a>.','ko');return}
+ msg.hidden=true;payload=new URLSearchParams(new FormData(f));payload.set('intent',intent);
+ if(intent==='rendez-vous'){f.hidden=true;head.forEach(function(c){c.hidden=true});bk.hidden=false;cal();slots();return}
+ var btns=[].slice.call(f.querySelectorAll('button'));loading(true,btns);
+ send(payload).then(function(){done('Votre demande est bien prise en compte. La brochure arrive dans votre boîte mail dans quelques minutes. Pensez à vérifier vos spams.')})
+ .catch(function(){show('Un souci technique est survenu. Appelez-nous au <a href="tel:+33956991776">'+TEL+'</a>.','ko')})
+ .finally(function(){loading(false,btns)});
 });
 });
 })();
