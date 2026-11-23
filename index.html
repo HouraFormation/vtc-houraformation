@@ -13,7 +13,7 @@
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',wait_for_update:500});
-(function(){try{var c=localStorage.getItem('houra_cookies');if(c==='ok')gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});}catch(e){}})();
+(function(){try{var c=localStorage.getItem('houra_cookies');if(c==='ok'){gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});if(window.clarity)clarity('consentv2',{ad_Storage:'granted',analytics_Storage:'granted'});}}catch(e){}})();
 </script>
 <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-WHNZZFZS"></script>
 <script>
@@ -883,6 +883,7 @@ function send(data){
  if(TEST)return new Promise(function(r){setTimeout(r,900)});
  return fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:data});
 }
+window.HouraSend=send;
 document.querySelectorAll('.lead-form').forEach(function(f){
 var msg=f.querySelector('.fmsg'),card=f.parentNode;
 var bk=document.createElement('div');bk.className='bk';bk.hidden=true;
@@ -918,7 +919,7 @@ bk.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||
  else if(b.classList.contains('bk-go'))book();
 });
 function done(t){bk.hidden=true;f.hidden=true;head.forEach(function(c){c.hidden=true});thx.innerHTML='<div class="thx-t">'+CHECK+'<span>Merci !</span></div><p>'+t+'</p>';thx.hidden=false;f.reset();step(1);
- window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead',lead_type:payload.get('intent')});
+ window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'lead',lead_type:payload.get('intent')});try{sessionStorage.setItem('houra_xp','envoye')}catch(e){}
  var y=card.getBoundingClientRect().top+window.scrollY-90;if(card.getBoundingClientRect().top<0)window.scrollTo({top:y,behavior:'smooth'})}
 function loading(on,btns){bk.classList.toggle('load',on);card.classList.toggle('load',on);btns.forEach(function(b){b.disabled=on})}
 function book(){
@@ -955,6 +956,108 @@ f.addEventListener('submit',function(e){
 })();
 </script>
 <script>window.addEventListener('pageshow',function(e){if(e.persisted)document.querySelectorAll('form.lead-form').forEach(function(x){x.reset()})});</script>
+<!-- Pop-up de sortie (exit intent) -->
+<style>
+#xp{position:fixed;inset:0;z-index:9998;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(15,20,45,.62);backdrop-filter:blur(3px)}
+#xp.on{display:flex;animation:xpf .25s ease}
+@keyframes xpf{from{opacity:0}to{opacity:1}}
+#xp .xb{position:relative;width:100%;max-width:880px;display:grid;grid-template-columns:1fr 1.05fr;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:xpu .3s ease}
+@keyframes xpu{from{transform:translateY(18px) scale(.98)}to{transform:none}}
+#xp .xl{position:relative;background:#1E2A5A url(img/chauffeur.jpg) center/cover;color:#fff;padding:34px 30px 30px;display:flex;flex-direction:column;justify-content:flex-end}
+#xp .xl:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,42,90,.35) 0%,rgba(30,42,90,.92) 62%)}
+#xp .xl>*{position:relative}
+#xp .xlogo{position:absolute;top:22px;left:30px;height:40px;width:auto;background:#fff;border-radius:8px;padding:6px 10px}
+#xp .xbad{display:inline-block;align-self:flex-start;background:#C8102E;color:#fff;font:600 12px/1 Poppins,system-ui,sans-serif;letter-spacing:.3px;padding:8px 12px;border-radius:99px;margin-bottom:14px}
+#xp .xl h3{font:400 42px/0.98 'Bebas Neue',sans-serif;margin:0 0 12px;letter-spacing:.5px}
+#xp .xl p{font:400 14.5px/1.5 Poppins,system-ui,sans-serif;margin:0 0 16px;color:#E3E6F0}
+#xp .xft{margin:2px 0 12px !important;padding-top:16px;border-top:1px solid rgba(255,255,255,.28);font:700 11.5px/1 Poppins,system-ui,sans-serif !important;letter-spacing:1.4px;text-transform:uppercase;color:#fff !important;opacity:.85}
+#xp .xck{list-style:none;margin:0;padding:0;font:500 14px/1.4 Poppins,system-ui,sans-serif}
+#xp .xck li{display:flex;gap:10px;align-items:flex-start;margin:0 0 9px}
+#xp .xck svg{flex:none;width:18px;height:18px;margin-top:1px;fill:none;stroke:#fff;stroke-width:3;background:#C8102E;border-radius:50%;padding:3px}
+#xp .xlg{display:flex;gap:10px;align-items:center;margin-top:16px}
+#xp .xlg img{height:30px;width:auto;background:#fff;border-radius:6px;padding:4px 7px}
+#xp .xr{padding:34px 32px 26px;font-family:Poppins,system-ui,sans-serif;color:#1E2A5A}
+#xp .xr h4{font:700 21px/1.25 Poppins,system-ui,sans-serif;margin:0 0 6px}
+#xp .xr .xs{font-size:13.5px;line-height:1.5;color:#4A5270;margin:0 0 18px}
+#xp .xx{position:absolute;top:12px;right:12px;z-index:2;width:36px;height:36px;border:0;border-radius:50%;background:#F3F5FA;color:#1E2A5A;font:600 20px/36px Arial,sans-serif;cursor:pointer}
+#xp .xx:hover{background:#E3E6F0}
+#xp form{display:flex;flex-direction:column;gap:12px}
+#xp .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#xp label.fl{display:block;font-size:12.5px;font-weight:600;margin:0 0 5px;color:#1E2A5A}
+#xp input[type=text],#xp input[type=email],#xp input[type=tel]{width:100%;box-sizing:border-box;height:44px;border:1.5px solid #C9CFDD;border-radius:8px;padding:0 12px;font:400 15px Poppins,system-ui,sans-serif;color:#1E2A5A;background:#fff}
+#xp input:focus{outline:none;border-color:#1E2A5A;box-shadow:0 0 0 3px rgba(30,42,90,.12)}
+#xp .xcs{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;line-height:1.45;color:#4A5270}
+#xp .xcs input{margin-top:2px;width:16px;height:16px;flex:none}
+#xp .xgo{height:52px;border:0;border-radius:8px;background:#C8102E;color:#fff;font:700 16px Poppins,system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 20px rgba(200,16,46,.3)}
+#xp .xgo:hover{background:#A50D26}
+#xp .xgo svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#xp .xno{display:block;margin:12px auto 0;border:0;background:none;color:#6B7290;font:500 13px Poppins,system-ui,sans-serif;text-decoration:underline;cursor:pointer}
+#xp .fmsg{margin:0;font-size:13.5px;font-weight:600}#xp .fmsg.ko{color:#C8102E}#xp .err{border-color:#C8102E !important}#xp label.xcs.err{color:#C8102E}#xp .xok{text-align:center;padding:40px 6px}#xp .xok svg{width:56px;height:56px;fill:none;stroke:#1a8f4c;stroke-width:2.2}#xp .xok b{display:block;font-size:22px;margin:12px 0 8px}#xp .xok p{margin:0;font-size:14.5px;line-height:1.55;color:#4A5270}#xp .xgo[disabled]{opacity:.6;cursor:wait}
+@media (max-width:760px){#xp{align-items:flex-end;padding:0}#xp .xb{grid-template-columns:1fr;border-radius:16px 16px 0 0;max-height:94vh;overflow:auto}#xp .xl{padding:22px 22px 18px;min-height:0}#xp .xlogo{display:none}#xp .xl h3{font-size:34px}#xp .xl p,#xp .xck{display:none}#xp .xr{padding:20px 22px 18px}#xp .xr h4,#xp .xr .xs{display:none}}
+</style>
+<div id="xp" role="dialog" aria-modal="true" aria-labelledby="xp-t">
+<div class="xb">
+<button type="button" class="xx" aria-label="Fermer">×</button>
+<div class="xl">
+<span class="xbad">Session de janvier 2027 · 20 places</span>
+<h3 id="xp-t">Avant de partir, prenez votre brochure</h3>
+<p>Le programme, les tarifs, les solutions de financement et qui nous sommes. Offerte, directement dans votre boîte mail.</p>
+<p class="xft">La formation Houra en bref</p>
+<ul class="xck">
+<li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Les 7 épreuves en 76 leçons et des examens blancs</li>
+<li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>À Meaux ou à distance, le soir</li>
+<li><svg viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></svg>Éligible au CPF, Qualiopi</li>
+</ul>
+</div>
+<div class="xr">
+<h4>Où vous envoie-t-on votre brochure ?</h4>
+<p class="xs">Un conseiller peut aussi vous rappeler pour répondre à vos questions.</p>
+<form class="xp-form" method="post" action="#" autocomplete="on" novalidate>
+<div class="g2"><div><label class="fl" for="xp-prenom">Prénom</label><input id="xp-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div><label class="fl" for="xp-nom">Nom</label><input id="xp-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
+<div><label class="fl" for="xp-mail">Email</label><input id="xp-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div>
+<div><label class="fl" for="xp-tel">Téléphone</label><input id="xp-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div>
+<label class="xcs"><input type="checkbox" name="consentement" required><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
+<button type="submit" name="intent" value="brochure" class="xgo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Prendre ma brochure offerte</button>
+<p class="fmsg" role="status" aria-live="polite" hidden></p>
+</form>
+<button type="button" class="xno">Non merci, je continue ma visite</button>
+</div>
+</div>
+</div>
+<script>
+(function(){
+var xp=document.getElementById('xp');if(!xp)return;
+var K='houra_xp',t0=Date.now(),open=false;
+function st(){try{return sessionStorage.getItem(K)}catch(e){return null}}
+function mark(v){try{sessionStorage.setItem(K,v)}catch(e){}}
+function busy(){var a=document.activeElement;return a&&/^(INPUT|SELECT|TEXTAREA)$/.test(a.tagName)}
+function show(){if(open||st()||Date.now()-t0<5000||busy())return;open=true;mark('vu');xp.classList.add('on');document.body.style.overflow='hidden';
+ try{window.dataLayer=window.dataLayer||[];dataLayer.push({event:'popup_sortie_vue'})}catch(e){}}
+function hide(){open=false;xp.classList.remove('on');document.body.style.overflow=''}
+xp.querySelector('.xx').onclick=hide;xp.querySelector('.xno').onclick=hide;
+xp.addEventListener('click',function(e){if(e.target===xp)hide()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&open)hide()});
+/* Ordinateur : la souris sort par le haut */
+if(matchMedia('(pointer:fine)').matches){document.addEventListener('mouseout',function(e){if(!e.relatedTarget&&e.clientY<=0)show()})}
+/* Mobile : remontee rapide apres avoir lu au moins la moitie de la page */
+else{var maxY=0,lastY=scrollY,lastT=Date.now();addEventListener('scroll',function(){var y=scrollY,n=Date.now(),h=document.documentElement.scrollHeight-innerHeight;if(y>maxY)maxY=y;
+ if(h>0&&maxY/h>0.5&&lastY-y>120&&n-lastT<250&&y>300)show();lastY=y;lastT=n},{passive:true})}
+var f=xp.querySelector('form'),msg=f.querySelector('.fmsg');
+f.addEventListener('input',function(e){e.target.classList.remove('err');var l=e.target.closest('label');if(l)l.classList.remove('err');msg.hidden=true});
+f.addEventListener('submit',function(e){e.preventDefault();var ok=true;
+ f.querySelectorAll('[required]').forEach(function(el){var v=el.type==='checkbox'?el.checked:(el.checkValidity()&&el.value.trim()!=='');if(!v){ok=false;(el.type==='checkbox'?el.closest('label'):el).classList.add('err')}});
+ if(!ok){msg.hidden=false;msg.className='fmsg ko';msg.textContent='Merci de compléter les champs en rouge et de cocher la case de contact.';return}
+ if(!window.HouraSend){msg.hidden=false;msg.className='fmsg ko';msg.textContent='Un souci technique est survenu. Utilisez le formulaire de la page.';return}
+ var p=new URLSearchParams(new FormData(f));p.set('intent','brochure');p.set('origine','popup-sortie');p.set('consentement','Oui');p.set('consentement_date',new Date().toISOString());p.set('consentement_texte',"J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.");
+ var b=f.querySelector('.xgo');b.disabled=true;
+ window.HouraSend(p).then(function(){mark('envoye');
+  f.parentNode.innerHTML='<div class="xok"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg><b>Merci !</b><p>Votre brochure arrive dans votre boîte mail dans quelques minutes. Pensez à vérifier vos spams.</p></div>';
+  try{window.dataLayer=window.dataLayer||[];dataLayer.push({event:'lead',lead_type:'brochure',lead_origin:'popup-sortie'})}catch(e){}
+ }).catch(function(){b.disabled=false;msg.hidden=false;msg.className='fmsg ko';msg.textContent='Un souci technique est survenu. Réessayez ou utilisez le formulaire de la page.'});
+});
+})();
+</script>
+
 <div id="ckb" hidden role="dialog" aria-label="Cookies" style="position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:560px;margin:0 auto;background:#fff;border:1px solid #DCDFE5;border-radius:8px;padding:16px 18px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#111;box-shadow:0 6px 24px rgba(0,0,0,.12)">
 <p style="margin:0 0 12px">Nous utilisons des cookies pour mesurer l'efficacité de nos publicités. Vous pouvez les accepter ou les refuser.</p>
 <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"><button type="button" id="ckn" style="padding:10px 16px;border:1px solid #111;background:#fff;color:#111;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-weight:600;cursor:pointer">Je refuse</button><button type="button" id="cky" style="padding:10px 16px;border:1px solid #125DA9;background:#125DA9;color:#fff;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-weight:600;cursor:pointer">J'accepte</button></div>
@@ -962,7 +1065,7 @@ f.addEventListener('submit',function(e){
 <script>
 (function(){var b=document.getElementById('ckb'),v=null;try{v=localStorage.getItem('houra_cookies')}catch(e){}
 if(!v)b.hidden=false;
-function set(x){try{localStorage.setItem('houra_cookies',x)}catch(e){}b.hidden=true;if(x==='ok')gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});}
+function set(x){try{localStorage.setItem('houra_cookies',x)}catch(e){}b.hidden=true;if(x==='ok')gtag('consent','update',{ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',analytics_storage:'granted'});if(window.clarity)clarity('consentv2',{ad_Storage:x==='ok'?'granted':'denied',analytics_Storage:x==='ok'?'granted':'denied'});}
 document.getElementById('cky').onclick=function(){set('ok')};document.getElementById('ckn').onclick=function(){set('no')};})();
 </script>
 </body>
