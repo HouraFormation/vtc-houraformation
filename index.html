@@ -558,12 +558,12 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 <h2 style="margin: 0 0 6px; font-size: 24px; font-weight: 700; color: #1E2A5A">Renseignez-vous <span class="red">sans engagement</span></h2>
 <p style="margin: 0 0 20px; font-size: 14px; line-height: 1.5; color: #4A5270">Un conseiller vous rappelle pour répondre à vos questions.</p>
 <form class="lead-form" method="post" action="#" autocomplete="on" novalidate style="display: flex; flex-direction: column; gap: 14px">
-<p class="fstep-n">Étape <b>1</b> sur 2</p><div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="h-prenom">Prénom</label><input id="h-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="h-nom">Nom</label><input id="h-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
+<div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="h-prenom">Prénom</label><input id="h-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="h-nom">Nom</label><input id="h-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
 <div class="field"><label for="h-mail">Email</label><input id="h-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div>
-<div class="field"><label for="h-tel">Téléphone</label><input id="h-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div><button type="button" class="btn btn-red fnext">Suivant</button></div>
-<div class="fstep" data-s="2" hidden><div class="grid2" style="gap: 14px"><div class="field"><label for="h-permis">Permis B depuis</label><select id="h-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="h-obj">Votre objectif</label><select id="h-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
+<div class="field"><label for="h-tel">Téléphone</label><input id="h-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div></div>
+<div class="fstep" data-s="2"><div class="grid2" style="gap: 14px"><div class="field"><label for="h-permis">Permis B depuis</label><select id="h-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="h-obj">Votre objectif</label><select id="h-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
 <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
-<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div><button type="button" class="fprev">Retour</button></div>
+<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div></div>
 <p class="fmsg" role="status" aria-live="polite" hidden></p>
 </form>
 </div>
@@ -797,11 +797,11 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 
 <h3 style="margin: 0 0 14px; font-size: 20px; font-weight: 700; color: #1E2A5A">Téléchargez la brochure</h3>
 <form class="lead-form" method="post" action="#" autocomplete="on" novalidate style="display: flex; flex-direction: column; gap: 14px">
-<p class="fstep-n">Étape <b>1</b> sur 2</p><div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="f-prenom">Prénom</label><input id="f-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
-<div class="grid2" style="gap: 12px"><div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div><div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div><button type="button" class="btn btn-red fnext">Suivant</button></div></div>
-<div class="fstep" data-s="2" hidden><div class="grid2" style="gap: 14px"><div class="field"><label for="f-permis">Permis B depuis</label><select id="f-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="f-obj">Votre objectif</label><select id="f-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
+<div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="f-prenom">Prénom</label><input id="f-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
+<div class="grid2" style="gap: 12px"><div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div><div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div></div></div>
+<div class="fstep" data-s="2"><div class="grid2" style="gap: 14px"><div class="field"><label for="f-permis">Permis B depuis</label><select id="f-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="f-obj">Votre objectif</label><select id="f-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
 <label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
-<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div><button type="button" class="fprev">Retour</button></div>
+<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div></div>
 <p class="fmsg" role="status" aria-live="polite" hidden></p>
 </form>
 </div>
@@ -922,19 +922,17 @@ function book(){
 }
 function show(t,c){msg.hidden=false;msg.className='fmsg '+c;msg.innerHTML=t}
 var KEY='houra_contact',CF=['prenom','nom','email','telephone'];
-try{var sv=JSON.parse(localStorage.getItem(KEY)||'null');if(sv)CF.forEach(function(k){var el=f.querySelector('[name='+k+']');if(el&&!el.value&&sv[k])el.value=sv[k]})}catch(e){}
-function remember(){try{var o={};CF.forEach(function(k){var el=f.querySelector('[name='+k+']');if(el)o[k]=el.value.trim()});localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+try{localStorage.removeItem(KEY)}catch(e){}
+function remember(){}
 var st=[].slice.call(f.querySelectorAll('.fstep')),stn=card.querySelector('.fstep-n');
 function step(i){st.forEach(function(x){x.hidden=x.dataset.s!==String(i)});if(stn)stn.querySelector('b').textContent=i;msg.hidden=true;var fi=st[i-1].querySelector('input,select');if(fi&&i===2)fi.focus({preventScroll:true})}
 function chk(scope){var ok=true;scope.querySelectorAll('[required]').forEach(function(el){var v=el.type==='checkbox'?el.checked:el.checkValidity()&&el.value.trim()!=='';if(!v){ok=false;if(el.type==='checkbox')el.closest('label').classList.add('err');else el.classList.add('err')}});return ok}
-f.querySelector('.fnext').addEventListener('click',function(){if(!chk(st[0])){show('Merci de compléter les champs en rouge.','ko');return}step(2)});
-f.querySelector('.fprev').addEventListener('click',function(){step(1)});
 f.addEventListener('input',function(e){e.target.classList.remove('err');var l=e.target.closest('label');if(l)l.classList.remove('err');msg.hidden=true});
 f.addEventListener('submit',function(e){
  e.preventDefault();
  var intent=(e.submitter&&e.submitter.value)||'brochure',ok=true;
  ok=chk(f);
- if(!ok){if(!chk(st[0]))step(1);show('Merci de compléter les champs en rouge et de cocher la case de contact.','ko');return}
+ if(!ok){show('Merci de compléter les champs en rouge et de cocher la case de contact.','ko');return}
  if(!ENDPOINT&&!TEST){show('Le formulaire est en cours d\'activation. Pour être rappelé tout de suite, appelez le <a href="tel:+33956991776">'+TEL+'</a>.','ko');return}
  msg.hidden=true;remember();payload=new URLSearchParams(new FormData(f));payload.set('intent',intent);payload.set('consentement','Oui');payload.set('consentement_date',new Date().toISOString());payload.set('consentement_texte','J\'accepte d\'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.');
  /* Calendrier mis de cote pour plus tard : la demande de rendez-vous devient une demande de rappel */
@@ -947,9 +945,10 @@ f.addEventListener('submit',function(e){
 });
 })();
 </script>
-<div id="ckb" hidden role="dialog" aria-label="Cookies" style="position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:560px;margin:0 auto;background:#fff;border:1px solid #DCDFE5;border-radius:8px;padding:16px 18px;font-size:14px;line-height:1.5;color:#111;box-shadow:0 6px 24px rgba(0,0,0,.12)">
+<script>window.addEventListener('pageshow',function(e){if(e.persisted)document.querySelectorAll('form.lead-form').forEach(function(x){x.reset()})});</script>
+<div id="ckb" hidden role="dialog" aria-label="Cookies" style="position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:560px;margin:0 auto;background:#fff;border:1px solid #DCDFE5;border-radius:8px;padding:16px 18px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#111;box-shadow:0 6px 24px rgba(0,0,0,.12)">
 <p style="margin:0 0 12px">Nous utilisons des cookies pour mesurer l'efficacité de nos publicités. Vous pouvez les accepter ou les refuser.</p>
-<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"><button type="button" id="ckn" style="padding:10px 16px;border:1px solid #111;background:#fff;color:#111;border-radius:6px;font-weight:600;cursor:pointer">Refuser</button><button type="button" id="cky" style="padding:10px 16px;border:1px solid #125DA9;background:#125DA9;color:#fff;border-radius:6px;font-weight:600;cursor:pointer">Accepter</button></div>
+<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"><button type="button" id="ckn" style="padding:10px 16px;border:1px solid #111;background:#fff;color:#111;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-weight:600;cursor:pointer">Je refuse</button><button type="button" id="cky" style="padding:10px 16px;border:1px solid #125DA9;background:#125DA9;color:#fff;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-weight:600;cursor:pointer">J'accepte</button></div>
 </div>
 <script>
 (function(){var b=document.getElementById('ckb'),v=null;try{v=localStorage.getItem('houra_cookies')}catch(e){}
