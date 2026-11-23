@@ -937,9 +937,10 @@ f.addEventListener('submit',function(e){
  if(!ok){if(!chk(st[0]))step(1);show('Merci de compléter les champs en rouge et de cocher la case de contact.','ko');return}
  if(!ENDPOINT&&!TEST){show('Le formulaire est en cours d\'activation. Pour être rappelé tout de suite, appelez le <a href="tel:+33956991776">'+TEL+'</a>.','ko');return}
  msg.hidden=true;remember();payload=new URLSearchParams(new FormData(f));payload.set('intent',intent);payload.set('consentement','Oui');payload.set('consentement_date',new Date().toISOString());payload.set('consentement_texte','J\'accepte d\'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.');
- if(intent==='rendez-vous'){f.hidden=true;head.forEach(function(c){c.hidden=true});bk.hidden=false;cal();slots();return}
+ /* Calendrier mis de cote pour plus tard : la demande de rendez-vous devient une demande de rappel */
+ var RAPPEL=intent==='rendez-vous';
  var btns=[].slice.call(f.querySelectorAll('button'));loading(true,btns);
- send(payload).then(function(){done('Votre demande est bien prise en compte. La brochure arrive dans votre boîte mail dans quelques minutes. Pensez à vérifier vos spams.')})
+ send(payload).then(function(){done(RAPPEL?'Votre demande de rendez-vous est bien prise en compte. Vous allez être recontacté très rapidement par notre équipe. La brochure arrive aussi dans votre boîte mail.':'Votre demande est bien prise en compte. La brochure arrive dans votre boîte mail dans quelques minutes. Pensez à vérifier vos spams.')})
  .catch(function(){show('Un souci technique est survenu. Appelez-nous au <a href="tel:+33956991776">'+TEL+'</a>.','ko')})
  .finally(function(){loading(false,btns)});
 });
