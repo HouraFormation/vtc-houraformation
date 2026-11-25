@@ -315,7 +315,7 @@ a{color:#C8102E}a:hover{color:#1E2A5A}
 .only-m{display:inline}
 .hero-hl{display:none!important}
 .hero-left{padding:40px 20px 44px!important}
-.hero-left .h1{font-size:26px!important;line-height:1.18!important}
+.hero-left .h1{font-size:31px!important;line-height:1.15!important}
 .hero-desc{font-size:15px!important;line-height:1.5!important;margin-top:16px!important}
 .hero-eye{font-size:12px!important;margin-bottom:10px!important}
 .hero-left img{height:34px!important}
@@ -483,6 +483,12 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 .fstep{display:flex;flex-direction:column;gap:14px}
 .fstep-n{margin:-6px 0 0;font-size:12.5px;font-weight:600;color:#8C93AD;letter-spacing:.02em}.fstep-n b{color:#C8102E}
 .fstep .fnext{width:100%!important;align-self:stretch;grid-column:1/-1}
+.req{color:#C8102E;font-weight:700}
+.lead-form input[type=checkbox]{-webkit-appearance:none;appearance:none;margin:2px 0 0;width:18px;height:18px;flex:none;border:1.5px solid #C9CFDD;border-radius:4px;background:#fff center/12px 12px no-repeat;cursor:pointer;color-scheme:light}
+.lead-form input[type=checkbox]:checked{background-color:#C8102E;border-color:#C8102E;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")}
+.lead-form input[type=checkbox]:focus-visible{outline:2px solid #1E2A5A;outline-offset:2px}
+.lead-form label.err input[type=checkbox]{border-color:#C8102E;background-color:#FFF6F7}
+.lead-form .fstep-n{margin:-4px 0 0}
 .fprev{align-self:flex-start;border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:#C8102E;text-decoration:underline;cursor:pointer;padding:0}
 
 /* Prise de rendez-vous */
@@ -553,7 +559,7 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 <div style="width: 100%; max-width: 660px">
 <p class="hero-eye" style="margin: 0 0 18px; font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #C9CFDD"><span class="only-d">Formation VTC à Meaux · Seine-et-Marne et Île-de-France</span><span class="only-m">Formation VTC en Île-de-France</span></p>
 <h1 class="h1" style="margin: 0; font-size: 46px; line-height: 1.12; font-weight: 700; color: #ffffff">Devenez chauffeur VTC à votre compte, <span style="color: #E0102F">sans quitter votre emploi</span></h1>
-<p class="hero-desc" style="margin: 22px 0 0; font-size: 18px; line-height: 1.6; color: #C9CFDD"><span class="only-d">On vous forme au métier, à l'examen et à la création de votre société, pour rouler sur les plateformes ou avec vos propres clients.</span><span class="only-m">On vous forme au métier, à l'examen et à la création de votre société.</span></p>
+<p class="hero-desc" style="margin: 22px 0 0; font-size: 18px; line-height: 1.6; color: #C9CFDD"><span class="only-d">On vous forme au métier, à l'examen et à la création de votre société, pour rouler sur les plateformes ou avec vos propres clients.</span><span class="only-m">Formez-vous au métier de chauffeur VTC et apprenez à trouver vos clients, avec une certification reconnue par l'État.</span></p>
 <div style="display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; background: #C8102E; border-radius: 999px; padding: 7px 16px; font-size: 14px; font-weight: 600; color: #ffffff"><span style="width: 7px; height: 7px; border-radius: 50%; background: #ffffff"></span>Session de janvier · 20 places</div>
 <ul class="hl hero-hl"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>En ligne ou sur place, le soir</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Éligible au CPF</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Accès à vie à la plateforme de formation</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Noté 5/5 sur Google</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Paiement en plusieurs fois</li></ul>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 30px; margin-top: 34px">
@@ -568,12 +574,16 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 <h2 style="margin: 0 0 6px; font-size: 24px; font-weight: 700; color: #1E2A5A">Renseignez-vous <span class="red">sans engagement</span></h2>
 <p style="margin: 0 0 20px; font-size: 14px; line-height: 1.5; color: #4A5270">Un conseiller vous rappelle pour répondre à vos questions.</p>
 <form class="lead-form" method="post" action="#" autocomplete="on" novalidate style="display: flex; flex-direction: column; gap: 14px">
-<div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="h-prenom">Prénom</label><input id="h-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="h-nom">Nom</label><input id="h-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
-<div class="field"><label for="h-mail">Email</label><input id="h-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div>
-<div class="field"><label for="h-tel">Téléphone</label><input id="h-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div></div>
-<div class="fstep" data-s="2"><div class="grid2" style="gap: 14px"><div class="field"><label for="h-permis">Permis B depuis</label><select id="h-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="h-obj">Votre objectif</label><select id="h-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
-<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
-<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div></div>
+<p class="fstep-n">Étape <b>1</b> sur 2</p>
+<div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="h-prenom">Prénom <span class="req" aria-hidden="true">*</span></label><input id="h-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="h-nom">Nom <span class="req" aria-hidden="true">*</span></label><input id="h-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
+<div class="field"><label for="h-mail">Email <span class="req" aria-hidden="true">*</span></label><input id="h-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div>
+<div class="field"><label for="h-tel">Téléphone <span class="req" aria-hidden="true">*</span></label><input id="h-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div>
+<button type="button" class="btn btn-red fnext">Suivant<svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+<div class="fstep" data-s="2"><div class="grid2" style="gap: 14px"><div class="field"><label for="h-permis">Permis B depuis</label><select id="h-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option><option>2 ans (conduite accompagnée)</option></select></div><div class="field"><label for="h-obj">Votre objectif</label><select id="h-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
+<div class="field"><label for="h-ville">Votre ville</label><input id="h-ville" name="ville" type="text" autocomplete="address-level2" placeholder="Ex. Meaux"></div>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande. <span class="req" aria-hidden="true">*</span></span></label>
+<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div>
+<button type="button" class="fprev">← Retour</button></div>
 <p class="fmsg" role="status" aria-live="polite" hidden></p>
 </form>
 </div>
@@ -807,11 +817,15 @@ button.btn[disabled]{opacity:.6;cursor:wait}
 
 <h3 style="margin: 0 0 14px; font-size: 20px; font-weight: 700; color: #1E2A5A">Téléchargez la brochure</h3>
 <form class="lead-form" method="post" action="#" autocomplete="on" novalidate style="display: flex; flex-direction: column; gap: 14px">
-<div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="f-prenom">Prénom</label><input id="f-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="f-nom">Nom</label><input id="f-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
-<div class="grid2" style="gap: 12px"><div class="field"><label for="f-mail">Email</label><input id="f-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div><div class="field"><label for="f-tel">Téléphone</label><input id="f-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div></div></div>
-<div class="fstep" data-s="2"><div class="grid2" style="gap: 14px"><div class="field"><label for="f-permis">Permis B depuis</label><select id="f-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option></select></div><div class="field"><label for="f-obj">Votre objectif</label><select id="f-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
-<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande.</span></label>
-<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div></div>
+<p class="fstep-n">Étape <b>1</b> sur 2</p>
+<div class="fstep" data-s="1"><div class="grid2" style="gap: 14px"><div class="field"><label for="f-prenom">Prénom <span class="req" aria-hidden="true">*</span></label><input id="f-prenom" name="prenom" required type="text" autocomplete="given-name"></div><div class="field"><label for="f-nom">Nom <span class="req" aria-hidden="true">*</span></label><input id="f-nom" name="nom" required type="text" autocomplete="family-name"></div></div>
+<div class="grid2" style="gap: 12px"><div class="field"><label for="f-mail">Email <span class="req" aria-hidden="true">*</span></label><input id="f-mail" name="email" required type="email" inputmode="email" autocomplete="email"></div><div class="field"><label for="f-tel">Téléphone <span class="req" aria-hidden="true">*</span></label><input id="f-tel" name="telephone" required pattern="[0-9 +().-]{10,}" type="tel" inputmode="tel" autocomplete="tel"></div></div>
+<button type="button" class="btn btn-red fnext">Suivant<svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+<div class="fstep" data-s="2"><div class="grid2" style="gap: 14px"><div class="field"><label for="f-permis">Permis B depuis</label><select id="f-permis" name="permis"><option>Plus de 3 ans</option><option>Moins de 3 ans</option><option>2 ans (conduite accompagnée)</option></select></div><div class="field"><label for="f-obj">Votre objectif</label><select id="f-obj" name="objectif"><option>Me reconvertir</option><option>Un revenu en plus</option><option>Faire une passerelle</option><option>Je me renseigne</option></select></div></div>
+<div class="field"><label for="f-ville">Votre ville</label><input id="f-ville" name="ville" type="text" autocomplete="address-level2" placeholder="Ex. Meaux"></div>
+<label style="display: flex; gap: 10px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; color: #4A5270"><input type="checkbox" name="consentement" required style="margin-top: 3px; width: 18px; height: 18px; flex: none"><span>J'accepte d'être contacté par Houra par téléphone, SMS et email au sujet de ma demande. <span class="req" aria-hidden="true">*</span></span></label>
+<div class="fbtn"><button type="submit" name="intent" value="brochure" class="btn btn-out"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"></path></svg>Télécharger la brochure</button><button type="submit" name="intent" value="rendez-vous" class="btn btn-red"><svg class="bic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>Prendre rendez-vous</button></div>
+<button type="button" class="fprev">← Retour</button></div>
 <p class="fmsg" role="status" aria-live="polite" hidden></p>
 </form>
 </div>
@@ -879,8 +893,15 @@ function pad(n){return(n<10?'0':'')+n}
 function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
 function slotsFor(d,list){var now=new Date();return list.filter(function(h){var t=new Date(d);t.setHours(+h.slice(0,2),+h.slice(3),0,0);return t-now>2*3600e3})}
 function bookable(d){var t=new Date();t.setHours(0,0,0,0);var max=new Date(t);max.setDate(max.getDate()+HORIZON);return d>=t&&d<=max&&JOURS.indexOf(d.getDay())>-1&&(slotsFor(d,MATIN).length+slotsFor(d,APREM).length)>0}
+/* Garde le gclid et les utm de la 1re visite (session ; 90 jours si cookies acceptés) */
+var TRK=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid'];
+var trk=(function(){var o={},now=Date.now();try{var a=JSON.parse(sessionStorage.getItem('houra_trk')||'null')||JSON.parse(localStorage.getItem('houra_trk')||'null');if(a&&a.t&&now-a.t<90*864e5)o=a.v||{}}catch(e){}
+ var fresh={};TRK.forEach(function(k){if(qs.get(k))fresh[k]=qs.get(k)});
+ if(fresh.gclid||fresh.gbraid||fresh.wbraid||fresh.utm_source){o=fresh}
+ var rec=JSON.stringify({t:now,v:o});try{sessionStorage.setItem('houra_trk',rec);if(localStorage.getItem('houra_cookies')==='ok')localStorage.setItem('houra_trk',rec)}catch(e){}
+ return o})();
 function send(data){
- data.set('page',location.href);['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','gbraid','wbraid'].forEach(function(k){if(qs.get(k))data.set(k,qs.get(k))});
+ data.set('page',location.href);TRK.forEach(function(k){var v=qs.get(k)||trk[k];if(v)data.set(k,v)});
  if(TEST)return new Promise(function(r){setTimeout(r,900)});
  return fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:data});
 }
@@ -936,11 +957,16 @@ var KEY='houra_contact',CF=['prenom','nom','email','telephone'];
 try{localStorage.removeItem(KEY)}catch(e){}
 function remember(){}
 var st=[].slice.call(f.querySelectorAll('.fstep')),stn=card.querySelector('.fstep-n');
-function step(i){st.forEach(function(x){x.hidden=x.dataset.s!==String(i)});if(stn)stn.querySelector('b').textContent=i;msg.hidden=true;var fi=st[i-1].querySelector('input,select');if(fi&&i===2)fi.focus({preventScroll:true})}
+var cur=1;
+function step(i){cur=i;st.forEach(function(x){x.hidden=x.dataset.s!==String(i)});if(stn)stn.querySelector('b').textContent=i;msg.hidden=true;var fi=st[i-1].querySelector('input,select');if(fi&&i===2)fi.focus({preventScroll:true})}
 function chk(scope){var ok=true;scope.querySelectorAll('[required]').forEach(function(el){var v=el.type==='checkbox'?el.checked:el.checkValidity()&&el.value.trim()!=='';if(!v){ok=false;if(el.type==='checkbox')el.closest('label').classList.add('err');else el.classList.add('err')}});return ok}
+f.querySelectorAll('.fnext').forEach(function(b){b.addEventListener('click',function(){if(chk(st[0]))step(2);else show('Merci de compléter les champs en rouge.','ko')})});
+f.querySelectorAll('.fprev').forEach(function(b){b.addEventListener('click',function(){step(1)})});
+step(1);
 f.addEventListener('input',function(e){e.target.classList.remove('err');var l=e.target.closest('label');if(l)l.classList.remove('err');msg.hidden=true});
 f.addEventListener('submit',function(e){
  e.preventDefault();
+ if(cur===1){if(chk(st[0]))step(2);else show('Merci de compléter les champs en rouge.','ko');return}
  var intent=(e.submitter&&e.submitter.value)||'brochure',ok=true;
  ok=chk(f);
  if(!ok){show('Merci de compléter les champs en rouge et de cocher la case de contact.','ko');return}
@@ -1059,9 +1085,24 @@ f.addEventListener('submit',function(e){e.preventDefault();var ok=true;
 })();
 </script>
 
-<div id="ckb" hidden role="dialog" aria-label="Cookies" style="position:fixed;left:16px;right:16px;bottom:16px;z-index:9999;max-width:560px;margin:0 auto;background:#fff;border:1px solid #DCDFE5;border-radius:8px;padding:16px 18px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#111;box-shadow:0 6px 24px rgba(0,0,0,.12)">
-<p style="margin:0 0 12px">Nous utilisons des cookies pour mesurer l'efficacité de nos publicités. Vous pouvez les accepter ou les refuser.</p>
-<div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap"><button type="button" id="ckn" style="padding:10px 16px;border:1px solid #111;background:#fff;color:#111;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-weight:600;cursor:pointer">Je refuse</button><button type="button" id="cky" style="padding:10px 16px;border:1px solid #125DA9;background:#125DA9;color:#fff;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-weight:600;cursor:pointer">J'accepte</button></div>
+<style>
+#ckb{box-sizing:border-box;position:fixed;left:24px;bottom:24px;z-index:9999;width:calc(100% - 48px);max-width:470px;background:#fff;border-radius:14px;padding:22px 24px 20px;font-family:Poppins,system-ui,sans-serif;color:#4A5270;box-shadow:0 12px 40px rgba(30,42,90,.22)}
+#ckb[hidden]{display:none}
+#ckb .ck-t{margin:0 0 8px;font-size:17px;font-weight:700;color:#1E2A5A}
+#ckb .ck-p{margin:0 0 16px;font-size:13.5px;line-height:1.55}
+#ckb .ck-p a{color:#1E2A5A;font-weight:500}
+#ckb .ck-b{display:flex;gap:10px}
+#ckb button{box-sizing:border-box;flex:1;min-height:44px;padding:8px 14px;border-radius:6px;font:600 14px Poppins,system-ui,sans-serif;cursor:pointer}
+#ckb #ckn{border:1.5px solid #1E2A5A;background:#fff;color:#1E2A5A}
+#ckb #cky{border:1.5px solid #C8102E;background:#C8102E;color:#fff}
+#ckb #cky:hover{background:#A50D26;border-color:#A50D26}
+#ckb button:focus-visible{outline:3px solid #1E2A5A;outline-offset:2px}
+@media (max-width:600px){#ckb{left:0;right:0;bottom:0;width:100%;max-width:none;border-radius:16px 16px 0 0;padding:20px 20px calc(18px + env(safe-area-inset-bottom))}#ckb .ck-t{font-size:16px}#ckb .ck-p{font-size:12.5px}#ckb .ck-b{flex-direction:column-reverse;gap:8px}}
+</style>
+<div id="ckb" hidden role="dialog" aria-labelledby="ck-t" aria-describedby="ck-p">
+<p class="ck-t" id="ck-t">Nous respectons votre vie privée.</p>
+<p class="ck-p" id="ck-p">Nous utilisons des cookies pour mesurer l'efficacité de nos publicités et améliorer votre navigation. Vous pouvez les accepter ou les refuser. <a href="https://houraformation.fr/mentions-legales.html#cookies">En savoir plus</a></p>
+<div class="ck-b"><button type="button" id="ckn">Tout refuser</button><button type="button" id="cky">Tout accepter</button></div>
 </div>
 <script>
 (function(){var b=document.getElementById('ckb'),v=null;try{v=localStorage.getItem('houra_cookies')}catch(e){}
